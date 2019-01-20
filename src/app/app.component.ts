@@ -1,3 +1,4 @@
+// Author: Hendrik Herdler
 import { Component } from '@angular/core';
 
 @Component({

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Customer } from './customer';
+import {query} from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,12 @@ import { Customer } from './customer';
 export class CustomerService {
 
   private dbPath = '/customers';
+  private dbOrder = 'name';
 
   customersRef: AngularFireList<Customer> = null;
 
   constructor(private db: AngularFireDatabase) {
-    this.customersRef = db.list(this.dbPath);
+    this.customersRef = db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
   }
 
   createCustomer(customer: Customer): void {

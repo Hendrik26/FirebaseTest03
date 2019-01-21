@@ -1,4 +1,4 @@
-// Author: Hendrik Herdler
+// Author: Hendrik Herdler //////////
 import { Component } from '@angular/core';
 
 @Component({

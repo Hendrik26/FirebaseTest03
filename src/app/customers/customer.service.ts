@@ -62,6 +62,7 @@ export class CustomerService {
     getCustomerByKey(key: string): Customer {
         let retCustomer: Customer;
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
+        /////
         return retCustomer;
     }
 

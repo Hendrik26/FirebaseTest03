@@ -11,6 +11,14 @@
       <input type="text" class="form-control" id="age" required [(ngModel)]="customer.age" name="age">
     </div>
 
+    <div>
+        CustomerId:
+        {{customerId}}<br>
+        Customerkey:
+        {{customer.key}}<br>
+        receivedCustomerIdError: {{receivedCustomerIdError}}<br>
+    </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>

@@ -13,6 +13,8 @@
 
   <span class="button is-small btn-primary" *ngIf='!customer.active' (click)='updateActive(true)'>Active</span>
 
+  <a routerLink="/customer-modify/{{customer.key}}">Customer bearbeiten</a>
+
   <span class="button is-small btn-danger" (click)='deleteCustomer()'>Delete</span>
 
   <div>

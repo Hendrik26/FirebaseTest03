@@ -1,4 +1,8 @@
 <h1>Customers</h1>
+<div>
+  Anz Customer: {{customers.length}}<br>
+  Ende<br>
+</div>
 <div *ngFor="let customer of customers" style="width: 300px;">
   <customer-details [customer]='customer'></customer-details>
 </div>

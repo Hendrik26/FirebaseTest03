@@ -13,6 +13,7 @@ export class CustomerService {
     private dbOrder = 'name';
 
     customersRef: AngularFireList<Customer> = null;
+    customersRefOne: AngularFireList<Customer> = null;
 
     constructor(private db: AngularFireDatabase) {
         this.customersRef = db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
@@ -59,11 +60,11 @@ export class CustomerService {
         return retCustomer;
     }
 
-    getCustomerByKey(key: string): Customer {
+    getCustomerByKey(key: string): Customer /*AngularFireList<Customer>*/ {
         let retCustomer: Customer;
-        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
-        //////////////
+        this.customersRefOne = this.db.list(this.dbPath, ref => ref.orderByChild('key').equalTo(key));
         return retCustomer;
+        //return this.customersRefOne;
     }
 
     deleteAll(): void {

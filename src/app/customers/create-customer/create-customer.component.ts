@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 
 import {Customer} from '../customer';
 import {CustomerService} from '../customer.service';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'create-customer',
@@ -62,12 +63,27 @@ export class CreateCustomerComponent implements OnInit {
     }
 
     private receiveCustomerByKey(key: string): void {
+        let methCustomers: any;
+        let retCustomer: Customer;
+        console.log('createCustomer receiveCustomerByKey() Part 001');
         /* this.customerService.getCustomerByKey(key)
             .subscribe(customer => {
                 // TODO remove this.invoice.....
                 this.customer = customer;
             }); */
-        this.customer = this.customerService.getCustomerByKey(key);
+        // this.customer = this.customerService.getCustomerByKey(key);
+        this.customerService.getCustomerByKey(key).snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+        ).subscribe(customers => {
+            methCustomers = customers;
+        });
+        console.log('createCustomer receiveCustomerByKey() Part 002');
+        retCustomer = methCustomers[0];
+        console.log('createCustomer receiveCustomerByKey() Part 003');
+        console.log('----------------------------------------------------------------------');
+        this.customer = retCustomer;
     }
 
     save() {

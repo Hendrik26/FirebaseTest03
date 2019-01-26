@@ -60,11 +60,14 @@ export class CustomerService {
         return retCustomer;
     }
 
-    getCustomerByKey(key: string): Customer /*AngularFireList<Customer>*/ {
-        let retCustomer: Customer;
+    getCustomerByKey(key: string): AngularFireList<Customer> {
+       // let retCustomer: Customer;
+        console.log('customereService getCustomerByKey() Part 001');
         this.customersRefOne = this.db.list(this.dbPath, ref => ref.orderByChild('key').equalTo(key));
-        return retCustomer;
-        // return this.customersRefOne;
+        console.log('customereService getCustomerByKey() Part 002');
+        console.log('----------------------------------------------------------------------------');
+        // return retCustomer;
+        return this.customersRefOne;
     }
 
     deleteAll(): void {

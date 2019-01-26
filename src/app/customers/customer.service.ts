@@ -64,7 +64,7 @@ export class CustomerService {
         let retCustomer: Customer;
         this.customersRefOne = this.db.list(this.dbPath, ref => ref.orderByChild('key').equalTo(key));
         return retCustomer;
-        //return this.customersRefOne;
+        // return this.customersRefOne;
     }
 
     deleteAll(): void {

@@ -65,7 +65,7 @@ export class CustomerService {
         console.log('customereService getCustomerByKey() Part 001');
         this.customersRefOne = this.db.list(this.dbPath, ref => ref.orderByChild('key').equalTo(key));
         console.log('customereService getCustomerByKey() Part 002');
-        console.log('----------------------------------------------------------------------------');
+        console.log('------------------------------------------------------------------------------');
         // return retCustomer;
         return this.customersRefOne;
     }

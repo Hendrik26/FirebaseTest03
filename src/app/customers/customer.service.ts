@@ -17,7 +17,7 @@ export class CustomerService {
 
     constructor(private db: AngularFireDatabase) {
         this.customersRef = db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
-        /////////
+        ////////////////
     }
 
     createCustomer(customer: Customer): void {

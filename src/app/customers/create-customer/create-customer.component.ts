@@ -49,11 +49,13 @@ export class CreateCustomerComponent implements OnInit {
         console.log('this.receivedCustomerIdError===' + this.receivedCustomerIdError);
         console.log('------------');
         if (this.receivedCustomerIdError) {
+            console.log('ngOnInit if-then');
+            console.log('-------------');
             this.customer = new Customer();
         } else {
             console.log('ngOnInit else');
             console.log('-------------');
-            this.receiveCustomerByKey(this.customerId);
+            // this.receiveCustomerByKey(this.customerId);
         }
     }
 

@@ -11,10 +11,13 @@ import { CustomerService } from '../customer.service';
 export class CustomersListComponent implements OnInit {
 
   customers: any;
+  customersCount = -1;
 
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
+    console.log('ngOnInit CustomersListComponent');
+      console.log('-------------------------');
     this.getCustomersList();
   }
 
@@ -27,6 +30,7 @@ export class CustomersListComponent implements OnInit {
     ).subscribe(customers => {
       this.customers = customers;
     });
+    // this.customersCount = this.customers.length;
   }
 
   deleteCustomers() {

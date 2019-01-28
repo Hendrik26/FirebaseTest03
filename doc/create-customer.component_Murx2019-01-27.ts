@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
-
 import {FormsModule} from '@angular/forms';
 
 import {Customer} from '../customer';
 import {CustomerService} from '../customer.service';
 import {map} from 'rxjs/operators';
-
 
 @Component({
     selector: 'create-customer',
@@ -17,7 +15,6 @@ import {map} from 'rxjs/operators';
 export class CreateCustomerComponent implements OnInit {
 
     customer: Customer = new Customer();
-    customers: any;
     customerId: string;
     submitted = false;
     receivedCustomerIdError = true;
@@ -48,19 +45,18 @@ export class CreateCustomerComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.customerService.receiveAllCustomers();
         this.receivedCustomerIdError = !this.hasReceivedCustomerId();
         console.log('this.receivedCustomerIdError===' + this.receivedCustomerIdError);
         console.log('------------');
-
         if (this.receivedCustomerIdError) {
+            console.log('ngOnInit if-then');
+            console.log('-------------');
             this.customer = new Customer();
         } else {
             console.log('ngOnInit else');
             console.log('-------------');
-            this.receiveCustomerByKey(this.customerId);
+            // this.receiveCustomerByKey(this.customerId);
         }
-
     }
 
     newCustomer(): void {
@@ -68,35 +64,40 @@ export class CreateCustomerComponent implements OnInit {
         this.customer = new Customer();
     }
 
+    private receiveCustomerByKeyOld(key: string): void {
+        let methCustomers: any;
+        let retCustomer: Customer;
+        console.log('createCustomer receiveCustomerByKey() Part 001');
+        /* this.customerService.getCustomerByKey(key)
+            .subscribe(customer => {
+                // TODO remove this.invoice.....
+                this.customer = customer;
+            }); */
+        // this.customer = this.customerService.getCustomerByKey(key);
+        this.customerService.getCustomerByKey(key).snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+        ).subscribe(customers => {
+            methCustomers = customers;
+        });
+        console.log('createCustomer receiveCustomerByKey() Part 002');
+        retCustomer = methCustomers[0];
+        console.log('createCustomer receiveCustomerByKey() Part 003');
+        console.log('----------------------------------------------------------------------');
+        this.customer = retCustomer;
+    }
 
     private receiveCustomerByKey(key: string): void {
         this.customerService.queryCustomerByKey(key);
         this.customerService.getCustomersList().snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-            )
-        ).subscribe(customers => {
-            this.customer = customers[0];
-
-        });
+            map(changes => changes.map( c => ({key: c.payload.key, ...c.payload.val()})))
+        )._subscribe(customers => { this.customer = customers[0]; });
     }
-
 
     save() {
-        if (this.receivedCustomerIdError) {
-            this.customerService.createCustomer(this.customer);
-            this.customer = new Customer();
-        } else {
-            if (this.customer !== undefined) {
-                this.updateCustomer();
-            }
-            this.router.navigateByUrl('customers');
-        }
-    }
-
-
-    updateCustomer() {
-        this.customerService.updateCustomer(this.customer.key, this.customer);
+        this.customerService.createCustomer(this.customer);
+        this.customer = new Customer();
     }
 
     onSubmit() {

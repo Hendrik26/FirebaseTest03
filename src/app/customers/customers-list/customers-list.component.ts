@@ -17,7 +17,8 @@ export class CustomersListComponent implements OnInit {
 
   ngOnInit() {
     console.log('ngOnInit CustomersListComponent');
-      console.log('-------------------------');
+    console.log('-------------------------');
+    this.customerService.queryAllCustomers();
     this.getCustomersList();
   }
 

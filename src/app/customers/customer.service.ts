@@ -16,8 +16,14 @@ export class CustomerService {
     customersRefOne: AngularFireList<Customer> = null;
 
     constructor(private db: AngularFireDatabase) {
-        this.customersRef = db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
-        ////////////////
+    }
+
+    queryAllCustomers(): void {
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
+    }
+
+    queryCustomerByKey(key): void {
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByKey().equalTo(key));
     }
 
     createCustomer(customer: Customer): void {
@@ -44,16 +50,16 @@ export class CustomerService {
         // retCustomer  = this.customersRef[key];
         this.customersRef.snapshotChanges().pipe(
             map(changes =>
-                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+                changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
             )
         ).subscribe(customers => {
             methCustomers = customers;
         });
         console.log('customereService getCustomerByKey() Part 001a');
-        for (let i = 0; i < methCustomers.length; i++){
-          if (methCustomers[i].key === key){
-              retCustomer = methCustomers[i];
-          }
+        for (let i = 0; i < methCustomers.length; i++) {
+            if (methCustomers[i].key === key) {
+                retCustomer = methCustomers[i];
+            }
         }
         console.log('customereService getCustomerByKey() Part 002');
         console.log(retCustomer.name);
@@ -62,7 +68,7 @@ export class CustomerService {
     }
 
     getCustomerByKey(key: string): AngularFireList<Customer> {
-       // let retCustomer: Customer;
+        // let retCustomer: Customer;
         console.log('customereService getCustomerByKey() Part 001');
         this.customersRefOne = this.db.list(this.dbPath, ref => ref.orderByChild('key').equalTo(key));
         console.log('customereService getCustomerByKey() Part 002');

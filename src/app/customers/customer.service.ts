@@ -42,31 +42,6 @@ export class CustomerService {
         return this.customersRef;
     }
 
-    getCustomerByKeyOld(key: string): Customer {
-        let retCustomer: Customer;
-        // let methCustomers: Customer[];
-        let methCustomers: any;
-        console.log('customereService getCustomerByKey() Part 001');
-        // retCustomer  = this.customersRef[key];
-        this.customersRef.snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-            )
-        ).subscribe(customers => {
-            methCustomers = customers;
-        });
-        console.log('customereService getCustomerByKey() Part 001a');
-        for (let i = 0; i < methCustomers.length; i++) {
-            if (methCustomers[i].key === key) {
-                retCustomer = methCustomers[i];
-            }
-        }
-        console.log('customereService getCustomerByKey() Part 002');
-        console.log(retCustomer.name);
-        console.log('customereService getCustomerByKey() Part 003');
-        return retCustomer;
-    }
-
     getCustomerByKey(key: string): AngularFireList<Customer> {
         // let retCustomer: Customer;
         console.log('customereService getCustomerByKey() Part 001');

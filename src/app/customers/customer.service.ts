@@ -3,6 +3,7 @@ import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {Customer} from './customer';
 import {query} from '@angular/animations';
 import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -38,8 +39,12 @@ export class CustomerService {
         this.customersRef.remove(key).catch(error => this.handleError(error));
     }
 
-    getCustomersList(): AngularFireList<Customer> {
-        return this.customersRef;
+    getCustomersList(): Observable<any> {
+        return this.customersRef.snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            )
+        );
     }
 
     getCustomerByKey(key: string): AngularFireList<Customer> {

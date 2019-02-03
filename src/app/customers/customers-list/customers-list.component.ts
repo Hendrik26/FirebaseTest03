@@ -24,11 +24,7 @@ export class CustomersListComponent implements OnInit {
 
   getCustomersList() {
     // Use snapshotChanges().map() to store the key
-    this.customerService.getCustomersList().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    ).subscribe(customers => {
+    this.customerService.getCustomersList().subscribe(customers => {
       this.customers = customers;
     });
     // this.customersCount = this.customers.length;

@@ -71,11 +71,7 @@ export class CreateCustomerComponent implements OnInit {
 
     private receiveCustomerByKey(key: string): void {
         this.customerService.queryCustomerByKey(key);
-        this.customerService.getCustomersList().snapshotChanges().pipe(
-            map(changes =>
-                changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-            )
-        ).subscribe(customers => {
+        this.customerService.getCustomersList().subscribe(customers => {
             this.customer = customers[0];
 
         });

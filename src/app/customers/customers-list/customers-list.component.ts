@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
+import {Customer} from '../customer';
 import { CustomerService } from '../customer.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { CustomerService } from '../customer.service';
 })
 export class CustomersListComponent implements OnInit {
 
-  customers: any;
+  customers: Customer[]; // any;
   customersCount = -1;
 
   constructor(private customerService: CustomerService) { }

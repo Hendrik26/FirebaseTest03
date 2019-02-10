@@ -69,7 +69,7 @@ export class CreateCustomerComponent implements OnInit {
     }
 
 
-    private receiveCustomerByKey(key: string): void {
+    private receiveCustomerByKeyOld002(key: string): void {
         this.customerService.queryCustomerByKey(key);
         this.customerService.getCustomersList().subscribe(customers => {
             this.customer = customers[0];
@@ -77,13 +77,23 @@ export class CreateCustomerComponent implements OnInit {
         });
     }
 
+    private receiveCustomerByKey(key: string): void {
+        this.customerService.getCustomerObjectByKey(key).valueChanges()
+            .subscribe(customer => {this.customer = customer});
+    }
+
 
     save() {
+        console.log('-------------');
+        console.log('class CreateCustomerComponent Method save()');
         if (this.receivedCustomerIdError) {
+            console.log('class CreateCustomerComponent Method save() Error');
             this.customerService.createCustomer(this.customer);
             this.customer = new Customer();
         } else {
+            console.log('class CreateCustomerComponent Method save() notError');
             if (this.customer !== undefined) {
+                console.log('class CreateCustomerComponent Method save() CustomerDefined');
                 this.updateCustomer();
             }
             this.router.navigateByUrl('customers');
@@ -92,7 +102,9 @@ export class CreateCustomerComponent implements OnInit {
 
 
     updateCustomer() {
-        this.customerService.updateCustomer(this.customer.key, this.customer);
+        console.log('-------------');
+        console.log('class CreateCustomerComponent Method updateCustomer()');
+        this.customerService.updateCustomer(this.customerId, this.customer);
     }
 
     onSubmit() {

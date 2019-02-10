@@ -68,13 +68,13 @@ export class CreateCustomerComponent implements OnInit {
         let methCustomers: any;
         let retCustomer: Customer;
         console.log('createCustomer receiveCustomerByKey() Part 001');
-        /* this.customerService.getCustomerByKey(key)
+        /* this.customerService.getCustomerObjectByKey(key)
             .subscribe(customer => {
                 // TODO remove this.invoice.....
                 this.customer = customer;
             }); */
-        // this.customer = this.customerService.getCustomerByKey(key);
-        this.customerService.getCustomerByKey(key).snapshotChanges().pipe(
+        // this.customer = this.customerService.getCustomerObjectByKey(key);
+        this.customerService.getCustomerObjectByKey(key).snapshotChanges().pipe(
             map(changes =>
                 changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
             )

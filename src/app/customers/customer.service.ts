@@ -56,9 +56,9 @@ export class CustomerService {
         );
     }
 
-    getCustomerObjectByKey(key: string): AngularFireObject<Customer> {
+    getCustomerObjectByKey(key: string): Observable<any> {
         const path = this.dbPath + '/' + key;
-        return this.db.object(path);
+        return this.db.object(path).valueChanges();
     }
 
     deleteAll(): void {

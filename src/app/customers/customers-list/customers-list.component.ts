@@ -20,6 +20,7 @@ export class CustomersListComponent implements OnInit {
     console.log('ngOnInit CustomersListComponent');
     console.log('-------------------------');
     this.customerService.queryAllCustomers();
+    // this.customerService.queryStartCustomers();
     this.getCustomersList();
   }
 

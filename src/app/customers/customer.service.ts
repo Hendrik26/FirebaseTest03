@@ -12,6 +12,7 @@ export class CustomerService {
 
     private dbPath = '/customers';
     private dbOrder = 'name';
+    private dbSelect = 'name';
 
     partialValue: Partial<any>;
 
@@ -23,6 +24,13 @@ export class CustomerService {
 
     queryAllCustomers(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
+    }
+    /* querySomeCustomers(): void {
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).where('name', '>=', 'f'));
+    } */
+
+    queryStartCustomers(): void {
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt('F'));
     }
 
     queryCustomerByKey(key): void {

@@ -30,7 +30,7 @@ export class CustomerService {
     } */
 
     queryStartCustomers(): void {
-        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt('F'));
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt('F').endAt('V'));
     }
 
     queryCustomerByKey(key): void {

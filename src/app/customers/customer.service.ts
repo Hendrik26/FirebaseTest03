@@ -76,4 +76,20 @@ export class CustomerService {
     private handleError(error) {
         console.log(error);
     }
+
+    private trim0(value: string): string {
+        value = value.trim();
+        if (value == ''){
+            value = '0';
+        }
+        return value;
+    }
+
+    private trimZ(value: string): string {
+        value = value.trim();
+        if (value == ''){
+            value = 'ZZZZZZZZZZZZZZZZZZZZ';
+        }
+        return value;
+    }
 }

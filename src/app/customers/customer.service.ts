@@ -17,6 +17,8 @@ export class CustomerService {
 
     customersRef: AngularFireList<Customer> = null;
     customersRefOne: AngularFireList<Customer> = null;
+    minString: string;
+    maxString: string;
 
     constructor(private db: AngularFireDatabase) {
     }
@@ -28,8 +30,13 @@ export class CustomerService {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).where('name', '>=', 'f'));
     } */
 
-    queryStartCustomers(): void {
+    queryStartCustomersOld(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt('F').endAt('V'));
+    }
+
+    queryStartCustomers(): void {
+        this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt(this.trim0(this.minString))
+            .endAt(this.trimZ(this.maxString)));
     }
 
     queryCustomerByKey(key): void {

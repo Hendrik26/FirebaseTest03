@@ -14,6 +14,9 @@ export class CustomersListComponent implements OnInit {
   customers: Customer[]; // any;
   customersCount = -1;
 
+  minString: string;
+  maxString: string;
+
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
@@ -23,6 +26,24 @@ export class CustomersListComponent implements OnInit {
     // this.customerService.queryStartCustomers();
     this.getCustomersList();
   }
+
+    changeBeginningName(e: string) {
+        this.minString = e;
+        this.customerService.minString = this.minString;
+    }
+
+    changeEndName(e: string) {
+        this.maxString = e;
+        this.customerService.maxString = this.maxString;
+    }
+
+    filterCustomerNameClick() {
+        this.customerService.minString = this.minString;
+        this.customerService.maxString = this.maxString;
+        console.log('-----------------------------------------------------------');
+        console.log('Method filterCustomerNameClick() done!!!');
+        console.log('-------------------------------------------------');
+    }
 
   getCustomersList() {
     // Use snapshotChanges().map() to store the key

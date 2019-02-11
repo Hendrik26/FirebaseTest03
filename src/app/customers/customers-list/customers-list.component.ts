@@ -40,6 +40,7 @@ export class CustomersListComponent implements OnInit {
     filterCustomerNameClick() {
         this.customerService.minString = this.minString;
         this.customerService.maxString = this.maxString;
+        this.customerService.queryStartCustomers();
         console.log('-----------------------------------------------------------');
         console.log('Method filterCustomerNameClick() done!!!');
         console.log('-------------------------------------------------');

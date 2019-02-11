@@ -30,11 +30,11 @@ export class CustomerService {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).where('name', '>=', 'f'));
     } */
 
-    queryStartCustomersOld(): void {
+    queryStartCustomers(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt('F').endAt('V'));
     }
 
-    queryStartCustomers(): void {
+    queryStartCustomersNew(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).startAt(this.trim0(this.minString))
             .endAt(this.trimZ(this.maxString)));
     }

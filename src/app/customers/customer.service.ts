@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {Customer} from './customer';
-import {query} from '@angular/animations';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -14,7 +13,7 @@ export class CustomerService {
     private dbOrder = 'name';
     private dbSelect = 'name';
 
-    partialValue: Partial<any>;
+    private partialValue: Partial<any>;
 
     customersRef: AngularFireList<Customer> = null;
     customersRefOne: AngularFireList<Customer> = null;

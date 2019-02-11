@@ -84,6 +84,12 @@ export class CustomerService {
     }
 
     private trim0(value: string): string {
+        if (value === undefined){
+            value = '0';
+        }
+        if (value === null){
+            value = '0';
+        }
         value = value.trim();
         if (value == ''){
             value = '0';
@@ -92,6 +98,12 @@ export class CustomerService {
     }
 
     private trimZ(value: string): string {
+        if (value === undefined){
+            value = 'ZZZZZZZZZZZZZZZZZZZZ';
+        }
+        if (value == null){
+            value = 'ZZZZZZZZZZZZZZZZZZZZ';
+        }
         value = value.trim();
         if (value == ''){
             value = 'ZZZZZZZZZZZZZZZZZZZZ';

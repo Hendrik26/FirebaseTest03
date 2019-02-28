@@ -26,7 +26,8 @@ export class CustomerService {
     queryAllCustomers(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder));
     }
-    /* querySomeCustomers(): void {
+
+    /*  querySomeCustomers(): void {
         this.customersRef = this.db.list(this.dbPath, ref => ref.orderByChild(this.dbOrder).where('name', '>=', 'f'));
     } */
 
